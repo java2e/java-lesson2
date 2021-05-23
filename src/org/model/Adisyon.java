@@ -10,6 +10,17 @@ public class Adisyon {
 
     private float fiyat;
 
+    public Adisyon(){
+
+    }
+
+    public Adisyon(int id, Musteri musteri, String menuAdi, float fiyat) {
+        this.id = id;
+        this.musteri = musteri;
+        this.menuAdi = menuAdi;
+        this.fiyat = fiyat;
+    }
+
     public int getId() {
         return id;
     }
