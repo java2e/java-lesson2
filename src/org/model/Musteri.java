@@ -1,5 +1,7 @@
 package org.model;
 
+import java.util.Objects;
+
 public class Musteri {
 
     private int id;
@@ -38,5 +40,21 @@ public class Musteri {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Musteri musteri = (Musteri) o;
+        return id == musteri.id &&
+                Objects.equals(adiSoyadi, musteri.adiSoyadi) &&
+                Objects.equals(adres, musteri.adres);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, adiSoyadi, adres);
     }
 }

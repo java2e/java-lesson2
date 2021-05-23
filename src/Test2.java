@@ -27,6 +27,16 @@ public class Test2 {
 
         adisyonService.ekle(adisyon1);
 
+        adisyon1.setMenuAdi("Yemek Güncel 2");
+
+        adisyonService.guncelle(adisyon1);
+
+
+        Musteri m = new Musteri(1,"Java","Adana"); //0x100
+        Musteri m2 = new Musteri(1,"Java","Adana"); //0x101
+
+
+
         System.out.println("Genel Toplam :"+adisyonService.adisyonToplami(musteri.getId()));
 
         for(Musteri mus:musteriService.liste())

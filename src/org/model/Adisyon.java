@@ -1,5 +1,7 @@
 package org.model;
 
+import java.util.Objects;
+
 public class Adisyon {
 
     private int id;
@@ -51,5 +53,22 @@ public class Adisyon {
 
     public void setFiyat(float fiyat) {
         this.fiyat = fiyat;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Adisyon adisyon = (Adisyon) o;
+        return id == adisyon.id &&
+                Float.compare(adisyon.fiyat, fiyat) == 0 &&
+                Objects.equals(musteri, adisyon.musteri) &&
+                Objects.equals(menuAdi, adisyon.menuAdi);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, musteri, menuAdi, fiyat);
     }
 }
