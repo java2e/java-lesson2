@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Test {
     /*
@@ -19,10 +21,17 @@ public class Test {
         System.out.println(liste.size()); // 2
 
         HashSet<Ogrenci> setListe = new HashSet<>();
+
+        Ogrenci ogrenci2 = new Ogrenci(2,"Python");
+        setListe.add(ogrenci2);
+        Ogrenci ogrenci3 = new Ogrenci(3,"C#");
+        setListe.add(ogrenci3);
         Ogrenci ogrenci1 = new Ogrenci(1,"Java");
         setListe.add(ogrenci1);
-        Ogrenci ogrenci2 = new Ogrenci(1,"Java");
-        setListe.add(ogrenci2);
+
+        setListe.stream().forEach(s-> System.out.println(s));
+
+
         System.out.println(setListe.size()); // 1
 
         /*
@@ -56,7 +65,15 @@ public class Test {
             System.out.println(s);
 
 
+        /*
+        Java Lambda Expression
+         */
+        List<Integer> l = listeSayi.stream().map(m -> m*10).collect(Collectors.toList());
 
+        for (int s:l)
+            System.out.println(s);
+
+        listeSayi.stream().filter(m -> m%2==0).collect(Collectors.toList()).forEach(s-> System.out.println(s));
 
     }
 }

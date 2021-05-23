@@ -40,4 +40,12 @@ public class Ogrenci {
     public int hashCode() {
         return Objects.hash(id, adi);
     }
+
+    @Override
+    public String toString() {
+        return "Ogrenci{" +
+                "id=" + id +
+                ", adi='" + adi + '\'' +
+                '}';
+    }
 }
