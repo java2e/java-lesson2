@@ -1,5 +1,6 @@
 package hastane.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Randevu extends BaseModel {
@@ -32,5 +33,12 @@ public class Randevu extends BaseModel {
 
     public void setHasta(Hasta hasta) {
         this.hasta = hasta;
+    }
+
+    @Override
+    public String toString() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+        return getId()+":"+this.hasta.getId()+":"+this.doktor.getId()+":"+dateFormat.format(this.randevuTarih);
     }
 }

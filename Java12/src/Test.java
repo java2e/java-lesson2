@@ -1,8 +1,12 @@
 import hastane.model.Bolum;
 import hastane.model.Doktor;
 import hastane.model.Hasta;
+import hastane.model.Randevu;
 import hastane.service.DoktorService;
 import hastane.service.HastaService;
+import hastane.service.RandevuService;
+
+import java.util.Date;
 
 public class Test {
     /*
@@ -60,6 +64,17 @@ public class Test {
 
         HastaService hastaService = new HastaService();
         hastaService.ekle(hasta);
+
+
+        RandevuService randevuService = new RandevuService();
+
+        Randevu randevu = new Randevu();
+        randevu.setId(1);
+        randevu.setDoktor(doktor);
+        randevu.setHasta(hasta);
+        randevu.setRandevuTarih(new Date());
+
+        randevuService.ekle(randevu);
 
 
     }

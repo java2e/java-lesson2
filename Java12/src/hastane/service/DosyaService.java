@@ -1,16 +1,15 @@
 package hastane.service;
 
 import com.sun.org.apache.regexp.internal.RE;
-import hastane.model.BaseModel;
-import hastane.model.Bolum;
-import hastane.model.Doktor;
-import hastane.model.Hasta;
+import hastane.model.*;
 import hastane.util.Dosya;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DosyaService {
@@ -39,10 +38,17 @@ randvu=>randvu.txt
                 fileWriter.write(Character.LINE_SEPARATOR); // bir aşağıya gecirmesi
                 fileWriter.close();
             }
+            else if(object instanceof Randevu)
+            {
+                FileWriter fileWriter = new FileWriter(new File(Dosya.RANDEVU_FILENAME),true);
+                fileWriter.write(((Randevu)object).toString());
+                fileWriter.write(Character.LINE_SEPARATOR); // bir aşağıya gecirmesi
+                fileWriter.close();
+            }
         }
         catch (Exception ex)
         {
-
+            System.out.println(ex.getCause());
         }
 
 
@@ -69,10 +75,19 @@ randvu=>randvu.txt
                 }
                 fileWriter.close();
             }
+            else if(object instanceof Randevu)
+            {
+                FileWriter fileWriter = new FileWriter(new File(Dosya.RANDEVU_FILENAME),false);
+                for(int i=0;i<liste.size();i++){
+                    fileWriter.write(((Randevu)liste.get(i)).toString());
+                    fileWriter.write(Character.LINE_SEPARATOR); // bir aşağıya gecirmesi
+                }
+                fileWriter.close();
+            }
         }
         catch (Exception ex)
         {
-
+            System.out.println(ex.getCause());
         }
 
 
@@ -137,6 +152,54 @@ randvu=>randvu.txt
 
                 }
                 return hastaList;
+            }
+            else if(object instanceof Randevu)
+            {
+                FileReader reader = new FileReader(new File(Dosya.RANDEVU_FILENAME));
+
+                int i = 0;
+                String satir = "";
+                List<Randevu> randevuList = new ArrayList<>();
+                while ((i = reader.read()) != -1) {
+                    char karakter = (char) i;
+                    if (karakter != Character.LINE_SEPARATOR)
+                        satir = satir + karakter;
+                    else {
+                        System.out.println(satir);
+                        String elemanlar[] = satir.split(":");
+                        // 1:1:1:12/12/2021 12:12
+                        Randevu randevu = new Randevu();
+                        randevu.setId(Integer.valueOf(elemanlar[0]));
+
+                        int hastaId= Integer.valueOf(elemanlar[1]);
+
+                        List<Hasta> hastaListesi = (List<Hasta>) dosyaOku(new Hasta());
+
+                        for(Hasta hasta:hastaListesi)
+                        {
+                            if(hasta.getId() == hastaId)
+                                randevu.setHasta(hasta);
+                        }
+
+                        int doktorId = Integer.valueOf(elemanlar[2]);
+
+                        List<Doktor> doktorList = (List<Doktor>) dosyaOku(new Doktor());
+
+                        for(Doktor doktor:doktorList)
+                        {
+                            if(doktor.getId() == doktorId)
+                                randevu.setDoktor(doktor);
+                        }
+
+                        //12/12/2021 12:12  dd/mm/yyyy hh:mm
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+                        randevu.setRandevuTarih(dateFormat.parse(elemanlar[3]));
+                        randevuList.add(randevu);
+                        satir = "";
+                    }
+
+                }
+                return randevuList;
             }
 
         }
