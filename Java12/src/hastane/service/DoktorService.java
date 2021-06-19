@@ -11,17 +11,44 @@ public class DoktorService implements BaseService<Doktor> {
     public void ekle(Doktor doktor) throws ServiceExcepiton {
         DosyaService dosyaService = new DosyaService();
         dosyaService.yazdir(doktor);
-
         dosyaService.dosyaOku(doktor);
     }
 
     @Override
     public void sil(Doktor doktor) throws ServiceExcepiton {
 
+        DosyaService dosyaService = new DosyaService();
+        List<Doktor> liste = (List<Doktor>) dosyaService.dosyaOku(new Doktor());
+
+        for(int i=0;i<liste.size();i++)
+        {
+            if(liste.get(i).getId() == doktor.getId())
+            {
+                liste.remove(i);
+                break;
+            }
+        }
+
+        dosyaService.update(liste,new Doktor());
+
+
     }
 
     @Override
     public void guncelle(Doktor doktor) throws ServiceExcepiton {
+
+        DosyaService dosyaService = new DosyaService();
+
+        List<Doktor> liste = (List<Doktor>) dosyaService.dosyaOku(new Doktor());
+
+        for(int i=0;i<liste.size();i++){
+            if(liste.get(i).getId() == doktor.getId())
+            {
+                liste.set(i,doktor);
+            }
+        }
+
+        dosyaService.update(liste,new Doktor());
 
     }
 
@@ -31,6 +58,6 @@ public class DoktorService implements BaseService<Doktor> {
         DosyaService dosyaService=new DosyaService();
         List<Doktor> liste = (List<Doktor>) dosyaService.dosyaOku(new Doktor());
 
-        return null;
+        return liste;
     }
 }

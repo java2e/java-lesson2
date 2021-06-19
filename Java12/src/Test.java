@@ -1,6 +1,8 @@
 import hastane.model.Bolum;
 import hastane.model.Doktor;
+import hastane.model.Hasta;
 import hastane.service.DoktorService;
+import hastane.service.HastaService;
 
 public class Test {
     /*
@@ -31,16 +33,34 @@ public class Test {
         Bolum bolum = Bolum.COCUK_HASTALIKLARI; // id,text 1=> Cocuk Hastalıkları
 
         Doktor doktor = new Doktor();
-        doktor.setId(1);
-        doktor.setAdi("Java");
+        doktor.setId(5);
+        doktor.setAdi("Mehmet");
         doktor.setSoyadi("Developer");
-        doktor.setSicilNo("1234");
-        doktor.setBolum(Bolum.COCUK_HASTALIKLARI);
+        doktor.setSicilNo("4534634");
+        doktor.setBolum(Bolum.DERMATAOLOJI);
 
         DoktorService doktorService = new DoktorService();
-        doktorService.ekle(doktor);
+        //doktorService.ekle(doktor);
 
+        //doktorService.liste();
+
+        //doktor.setId(4);
+        //doktorService.sil(doktor);
+        doktorService.guncelle(doktor);
         doktorService.liste();
+
+
+        Hasta hasta = new Hasta();
+        hasta.setId(1);
+        hasta.setAdi("Mehmet");
+        hasta.setSoyadi("Java");
+        hasta.setTcNo("12313123");
+        hasta.setAdres("Ankara");
+        hasta.setYasi(17);
+
+        HastaService hastaService = new HastaService();
+        hastaService.ekle(hasta);
+
 
     }
 }

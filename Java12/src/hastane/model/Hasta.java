@@ -51,4 +51,9 @@ public class Hasta extends BaseModel{
     public void setAdres(String adres) {
         this.adres = adres;
     }
+
+    @Override
+    public String toString() {
+        return getId()+":"+this.adi+":"+this.soyadi+":"+this.tcNo+":"+this.yasi+":"+this.adres;
+    }
 }
