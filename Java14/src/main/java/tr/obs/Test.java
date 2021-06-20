@@ -1,5 +1,6 @@
 package tr.obs;
 
+import tr.obs.model.Ders;
 import tr.obs.model.Ogrenci;
 import tr.obs.service.BaseService;
 
@@ -27,5 +28,12 @@ public class Test {
         ogrenci.setBolum("Bilgisayar Mühendisliği");
 
         baseService.excelYaz(ogrenci);
+
+        Ders ders = new Ders();
+        ders.setId(1);
+        ders.setDersAdi("Matematik");
+        ders.setKredi(4);
+
+        baseService.excelYaz(ders);
     }
 }
