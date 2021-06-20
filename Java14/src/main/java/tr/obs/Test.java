@@ -2,6 +2,7 @@ package tr.obs;
 
 import tr.obs.model.Ders;
 import tr.obs.model.Ogrenci;
+import tr.obs.model.OgrenciDers;
 import tr.obs.service.BaseService;
 
 import java.io.IOException;
@@ -35,5 +36,14 @@ public class Test {
         ders.setKredi(4);
 
         baseService.excelYaz(ders);
+
+        OgrenciDers ogrenciDers = new OgrenciDers();
+        ogrenciDers.setDers(ders);
+        ogrenciDers.setOgrenci(ogrenci);
+        ogrenciDers.setVize(20);
+        ogrenciDers.setFinalNotu(50);
+        ogrenciDers.setOrtalama(35);
+
+        baseService.excelYaz(ogrenciDers);
     }
 }
