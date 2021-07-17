@@ -16,6 +16,8 @@ public class Ogrenci {
 
     private String bolum;
 
+    private String cinsiyet;
+
     public int getId() {
         return id;
     }

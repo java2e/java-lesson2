@@ -50,7 +50,7 @@ public class BaseService {
 
             for(int i=0;i<field.length;i++)
             {
-                field[i].setAccessible(true);
+                field[i].setAccessible(true); // private?
                 Object o = field[i].get(ogrenci);
                 Cell cell = row.createCell(i);
                 cell.setCellValue(o.toString());
